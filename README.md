@@ -19,10 +19,10 @@ pip install user_agent
 
 pip install pyfiglet
 
-git clone https://github.com/Topherblood/Topher-DDOS
+git clone https://github.com/Topherblood/Dedsec-DDOS
 
-cd Topher-DDOS
+cd Dedsec-DDOS
 
-python Topher-DDos.py
+python Dedsec-DDos.py
 
 ![Screenshot_20240702-133249.jpg](https://github.com/Topherblood/Topher-DDOS/assets/162853344/fe09f376-917e-49be-943e-5a71254808dc)
