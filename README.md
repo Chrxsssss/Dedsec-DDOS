@@ -25,4 +25,4 @@ cd Dedsec-DDOS
 
 python Dedsec-DDos.py
 
-![Screenshot_20240702-133249.jpg](https://github.com/Topherblood/Topher-DDOS/assets/162853344/fe09f376-917e-49be-943e-5a71254808dc)
+![Screenshot_20250730-192657 (1).jpg](https://github.com/user-attachments/assets/d468eaee-ce71-4c71-bfc9-e2c0821c32e4)
