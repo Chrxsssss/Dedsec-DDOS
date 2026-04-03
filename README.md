@@ -19,7 +19,7 @@ pip install user_agent
 
 pip install pyfiglet
 
-git clone https://github.com/Topherblood/Dedsec-DDOS
+git clone https://github.com/Chrxsssss/Dedsec-DDOS
 
 cd Dedsec-DDOS
 
