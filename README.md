@@ -32,13 +32,14 @@ L’utilisation non autorisée de ce script pour attaquer des systèmes informat
 ## 🔰 INSTALLATION 🔰
 
 ```bash
-apt update && apt upgrade -y
+apt update
+apt upgrade
 
-apt install git -y
+apt install git
+pkg install python
 
-pkg install python -y
-
-pip install user_agent pyfiglet
+pip install user_agent
+pip install pyfiglet
 
 git clone https://github.com/Chrxsssss/Dedsec-DDOS
 
