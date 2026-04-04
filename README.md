@@ -1,4 +1,4 @@
-# 💀 Dedsec-DDOS ⚡
+#  Dedsec-DDOS 💣
 
 ![GitHub stars](https://img.shields.io/github/stars/Chrxsssss/Dedsec-DDOS?style=for-the-badge)
 ![GitHub forks](https://img.shields.io/github/forks/Chrxsssss/Dedsec-DDOS?style=for-the-badge)
@@ -11,7 +11,7 @@
 
 ❌ Ce script est un outil puissant ⚡ qui peut causer des dommages considérables s’il est mal utilisé.  
 
-Il est conçu par **ʜᴀᴄᴋᴇʀ₂₈₀₆** 👤, membre de la région **Dedsec** 🕶️ pour des démonstrations de sécurité 🔐 et des tests en environnement contrôlé 🧪 avec l’autorisation explicite des propriétaires des systèmes concernés.
+Il est conçu par **Mr₂₈₀₆** 👤, membre de la région **Dedsec** 🕶️ pour des démonstrations de sécurité 🔐 et des tests en environnement contrôlé 🧪 avec l’autorisation explicite des propriétaires des systèmes concernés.
 
 ---
 
@@ -25,7 +25,6 @@ L’utilisation non autorisée de ce script pour attaquer des systèmes informat
 
 🔰 Soyez responsables et éthiques dans vos actions.  
 🔐 Utilisez uniquement dans un cadre légal et autorisé.  
-⚠️ Ne testez que sur vos propres systèmes ou avec permission.
 
 ---
 
