@@ -45,4 +45,7 @@ git clone https://github.com/Chrxsssss/Dedsec-DDOS
 cd Dedsec-DDOS
 
 python Dedsec-DDos.py
+
+
+
 ![Screenshot_20250730-192657 (1).jpg](https://github.com/user-attachments/assets/d468eaee-ce71-4c71-bfc9-e2c0821c32e4)
